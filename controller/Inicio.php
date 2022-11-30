@@ -12,7 +12,7 @@ class Inicio extends App
 
   public function index()
   {
-    if ($this->Sesion->isConnected()) {
+    if (!$this->Sesion->isConnected()) {
       $this->view('head', "Inicio");
       $data = $this->Inicio_model->getAllOrden();
       $this->view('inicio', $data);

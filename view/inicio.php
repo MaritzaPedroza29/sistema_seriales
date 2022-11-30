@@ -1,4 +1,4 @@
-<?php foreach ($data as $Orden):?>
+<?php if(is_array($data) || is_object($data)) foreach ($data as $Orden):?>
   <div class="row">
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary"></h6>
