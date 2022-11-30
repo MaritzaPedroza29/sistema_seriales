@@ -35,7 +35,7 @@ class Inicio extends App
       else
         break;
     }
-    $archivo = BASE_URL.'productos.csv';
+    $archivo = 'productos.csv';
     $fh = fopen($archivo, 'w') or die("No se puede abrir el archivo: $archivo");
     $info = array("nombre_provedor", "fecha", "numero_orden");
     fputcsv($fh, $info, ",");
