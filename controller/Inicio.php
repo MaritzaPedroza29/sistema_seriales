@@ -14,8 +14,8 @@ class Inicio extends App
   {
     if ($this->Sesion->isConnected()) {
       $this->view('head', "Inicio");
-      $resul = $this->Inicio_model->getAllOrden();
-      $this->view('inicio', $resul);
+      $data = $this->Inicio_model->getAllOrden();
+      $this->view('inicio', $data);
       $this->view('foter');
     } else
       $this->redirectTo('user');
