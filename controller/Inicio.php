@@ -18,7 +18,7 @@ class Inicio extends App
       $this->view('inicio', $resul);
       $this->view('foter');
     } else
-      $this->redirectTo('Login');
+      $this->redirectTo('user');
   }
 
   public function createCSV()
