@@ -12,7 +12,7 @@ class User extends App
 
   public function index()
   {
-    if ($this->Sesion->isConnected()) {
+    if (!$this->Sesion->isConnected()) {
       $this->view('head', "Login");
       $this->view('login');
       $this->view('foter');
