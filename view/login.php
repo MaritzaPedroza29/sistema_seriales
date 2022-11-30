@@ -1,5 +1,5 @@
 <div class="overlay" id="app">
-   <form action="<?php echo BASE_URL?>login/userLogIn" method="post">
+   <form action="<?php echo BASE_URL?>user/userLogIn" method="post">
       <div class="con">
          <header class="head-form">
             <h2>Log In</h2><br>

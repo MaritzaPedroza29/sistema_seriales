@@ -31,7 +31,6 @@ class User extends App
 
       if (!$user) {
         echo json_encode("Usuario incorrecto");
-        echo json_encode($user);
         $this->index();
         return;
       }
@@ -54,7 +53,7 @@ class User extends App
       $this->Sesion->logout();
       return;
     }
-    $this->redirectTo('login', null, true);
+    $this->redirectTo('user', null, true);
   }
 }
 ?>
