@@ -1,5 +1,20 @@
+<style :scope>
+   /* Start body rules */
+   body {
+      background-image: linear-gradient(-225deg, #071570 0%, #ffffff 100%);
+      background-image: linear-gradient(to top, #071570 0%, #ffffff 100%);
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+
+      font-family: 'Vibur', cursive;
+      /*   the main font */
+      font-family: 'Abel', sans-serif;
+      opacity: .95;
+      /* background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%); */
+   }
+</style>
 <div class="overlay" id="app">
-   <form action="<?php echo BASE_URL?>user/userLogIn" method="post">
+   <form action="<?php echo BASE_URL ?>user/userLogIn" method="post">
       <div class="con">
          <header class="head-form">
             <h2>Log In</h2><br>
