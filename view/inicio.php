@@ -1,0 +1,24 @@
+<?php foreach ($data as $Orden):?>
+  <div class="row">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary"></h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <div class="container">
+          <div class="row align-items-start">
+            <h6><strong>Nombre:</strong><br><a href="#" style="color:#000000">
+                <?php echo $Orden['nombre_provedor'];?>
+              </a></h6>
+            <h6><strong>Fecha:</strong><br>
+              <?php echo $Orden['fecha'];?>
+            </h6>
+            <h6><strong>Número de orden:</strong><br>
+              <?php echo $Orden['numero_orden'];?>
+            </h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php endforeach; ?>
