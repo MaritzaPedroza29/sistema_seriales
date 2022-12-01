@@ -28,24 +28,20 @@ class Inicio extends App
     while ($i < 1000) {
       $url = "https://api.alegra.com/api/v1/purchase-orders?order_direction=DESC&order_field=id&status=open&fields=deletable&start=$i";
       $vector = $this->Alegra->getDataApiAlegra($url);
-      $cuantos = count($vector);
-      $suma = array_merge($suma, $vector);
-      if ($cuantos == 30)
-        $i += 30;
-      else
+      if ((is_array($vector) || is_object($vector))) { // esta condición verifica que me haya llegado datos de la API
+        $i = $i + 30; // Aumeta de treinta como usted tenía 
+        foreach ($vector as $data) { // se mira el resultado de la consulta de la API 
+          $orden = $this->Inicio_model->getOrdenID($data["id"]); // Se hace una consulta a la base de datos para optener una oreden por ID
+          if (
+            !(is_array($orden) || is_object($orden)) // Esta condicion verifica que la orden no exista
+            && $data["deletable"] === TRUE // esta condicion verifica que "deletable" sea verdadero
+          ) {
+            $this->Inicio_model->setProductos($data["purchases"]["items"]); // este metodo envía los items al modelo /model/Inicio_model.php
+          }
+        }
+      } else
         break;
     }
-    $archivo = 'productos.csv';
-    $fh = fopen($archivo, 'w') or die("No se puede abrir el archivo: $archivo");
-    $info = array("nombre_provedor", "fecha", "numero_orden");
-    fputcsv($fh, $info, ",");
-    foreach ($suma as $fila) {
-      if ($fila['deletable'] == "true") {
-        $lista = array($fila['provider']['name'], $fila['date'], $fila['id']);
-        fputcsv($fh, $lista, ",");
-      }
-    }
-    fclose($fh) or die("No se puede cerrar el archivo: $archivo");
   }
 }
 ?>

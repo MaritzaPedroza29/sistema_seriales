@@ -17,10 +17,12 @@ class User_model extends Database
     {
         try {
             $this->connect();
-            $l = $this->insert('usuarios', array(
-                'usuario' => $usuario,
-                'clave' => $clave
-            )
+            $l = $this->insert(
+                'usuarios',
+                array(
+                    'usuario' => $usuario,
+                    'clave' => $clave
+                )
             );
             $id = $this->getLastId();
             $this->close();
