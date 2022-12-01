@@ -32,11 +32,11 @@ class Inicio_model extends Database
         }
     }
 
-    public function getOrdenID($id)
+    public function getOrdenNumeroOrden($num)
     {
         try {
             $this->connect();
-            $sql = "SELECT * FROM orden_compra WHERE id_orden = ".$id;
+            $sql = "SELECT * FROM orden_compra WHERE numero_orden = ".$num;
             $result = $this->getDataSingle($sql);
             $this->close();
             return $result;

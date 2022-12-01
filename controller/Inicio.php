@@ -43,7 +43,7 @@ class Inicio extends App
       if ((is_array($vector) || is_object($vector))) { // esta condición verifica que me haya llegado datos de la API
         $i = $i + 30; // Aumeta de treinta como usted tenía 
         foreach ($vector as $data) { // se mira el resultado de la consulta de la API 
-          $orden = $this->Inicio_model->getOrdenID($data["id"]); // Se hace una consulta a la base de datos para optener una oreden por ID
+          $orden = $this->Inicio_model->getOrdenNumeroOrden($data["id"]); // Se hace una consulta a la base de datos para optener una oreden por ID
           if (
             !(is_array($orden) || is_object($orden)) && // Esta condicion verifica que la orden no exista
             $data["deletable"] === TRUE // esta condicion verifica que "deletable" sea verdadero
