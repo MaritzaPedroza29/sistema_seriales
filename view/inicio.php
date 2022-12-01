@@ -7,7 +7,7 @@
       <div class="table-responsive">
         <div class="container">
           <div class="row align-items-start">
-            <h6><strong>Nombre:</strong><br><a href="#" style="color:#000000">
+            <h6><strong>Nombre:</strong><br><a href="<?php echo BASE_URL?>inicio/orden?id=<?php echo $Orden['id_orden']?>" style="color:#000000">
                 <?php echo $Orden['nombre_provedor'];?>
               </a></h6>
             <h6><strong>Fecha:</strong><br>

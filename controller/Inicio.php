@@ -21,6 +21,18 @@ class Inicio extends App
       $this->redirectTo('user');
   }
 
+
+  public function orden()
+  {
+    if (isset($_GET['id'])) {
+      $data = $this->Inicio_model->getOrdenID($_GET["id"]);
+      $this->view('head', "Titulo de la vista");
+      $this->view('verOrden', $data);
+      $this->view('foter');
+    } else $this->redirectTo('inicio', null, true);
+
+  }
+
   public function createCSV()
   {
     $suma = [];
@@ -33,8 +45,8 @@ class Inicio extends App
         foreach ($vector as $data) { // se mira el resultado de la consulta de la API 
           $orden = $this->Inicio_model->getOrdenID($data["id"]); // Se hace una consulta a la base de datos para optener una oreden por ID
           if (
-            !(is_array($orden) || is_object($orden)) // Esta condicion verifica que la orden no exista
-            && $data["deletable"] === TRUE // esta condicion verifica que "deletable" sea verdadero
+            !(is_array($orden) || is_object($orden)) && // Esta condicion verifica que la orden no exista
+            $data["deletable"] === TRUE // esta condicion verifica que "deletable" sea verdadero
           ) {
             $this->Inicio_model->setProductos($data["purchases"]["items"]); // este metodo envía los items al modelo /model/Inicio_model.php
           }

@@ -5,7 +5,7 @@ class Inicio_model extends Database
     {
         try {
             $this->connect();
-            $sql = "SELECT `nombre_provedor`, `fecha`, `numero_orden` FROM `orden_compra`";
+            $sql = "SELECT *  FROM orden_compra";
             $result = $this->getData($sql);
             $this->close();
             return $result;
@@ -36,7 +36,7 @@ class Inicio_model extends Database
     {
         try {
             $this->connect();
-            $sql = "SELECT * FROM orden_compra WHILE id_orden = ".$id;
+            $sql = "SELECT * FROM orden_compra WHERE id_orden = ".$id;
             $result = $this->getDataSingle($sql);
             $this->close();
             return $result;
