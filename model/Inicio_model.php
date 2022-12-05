@@ -31,16 +31,17 @@ class Inicio_model extends Database
         }
     }
 
-    public function setOrdenCompra($nombre_provedor, $fecha, $numero_orden)
+    public function setOrdenCompra($nombre_provedor, $fecha, $id_orden)
     {
         try {
             $this->connect();
             $l = $this->insert(
                 'orden_compra', // nombre de la tabla
                 array(
+                    'id_orden' => $id_orden,
                     'nombre_provedor' => $nombre_provedor,
-                    'fecha' => $fecha,
-                    'numero_orden' => $numero_orden
+                    'fecha' => $fecha
+                    
                 )
             );
             $this->close();
@@ -54,7 +55,7 @@ class Inicio_model extends Database
     {
         try {
             $this->connect();
-            $sql = " SELECT productos.Nombre, productos.referencia, cantidad FROM `prod_oc` JOIN productos ON prod_oc.id_producto = productos.id_producto JOIN orden_compra ON prod_oc.id_orden = orden_compra.id_orden WHERE orden_compra.id_orden = " . $id;
+            $sql = " SELECT productos.nombre, productos.referencia, cantidad FROM `prod_oc` JOIN productos ON prod_oc.id_producto = productos.id_producto JOIN orden_compra ON prod_oc.id_orden = orden_compra.id_orden WHERE orden_compra.id_orden = " . $id;
             $result = $this->getDataSingle($sql);
             $this->close();
             return $result;

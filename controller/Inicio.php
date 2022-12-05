@@ -83,9 +83,9 @@ class Inicio extends App
             $data["deletable"] === TRUE // esta condicion verifica que "deletable" sea verdadero
 
           ) {
-            foreach ($data["purchases"]["items"] as $item) {
-              $this->Inicio_model->setProductos($item); // este metodo envía los items al modelo /model/Inicio_model.php
-            }
+            //foreach ($data["purchases"]["items"] as $item) {
+              //$this->Inicio_model->setProductos($item); // este metodo envía los items al modelo /model/Inicio_model.php
+            //}
             $this->Inicio_model->setOrdenCompra(
               $data["provider"]["name"],
               $data["date"],
@@ -96,8 +96,6 @@ class Inicio extends App
       } else
         break;
     }
-    //echo $i;
-    echo $p;
   }
 }
 ?>

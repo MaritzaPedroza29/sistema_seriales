@@ -32,7 +32,7 @@
     <!-- VueJS @2 -->
     <nav class="navbar navbar-expand navbar-light  topbar mb-6 static-top shadow" style="background-color: #000080;">
             <div class="container" style="align-items:center;">
-                <img src="../img/LogoPNGBlanco.png" width="250">
+                <img src="./img/LogoPNGBlanco.png" width="250">
             </div>
     </nav>
 </head>

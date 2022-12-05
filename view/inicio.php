@@ -1,8 +1,9 @@
-<h3 class="text-center" style="margin-top: 20px; margin-bottom: 20px;">Lista de ordenes</h3>
+<h3 style="margin-top: 20px; margin-bottom: 20px; text-align:right;">Lista de ordenes</h3>
+<button type="submit" class="btn btn-primary pull-right">Sincronizar</button>
 <?php if(is_array($data) || is_object($data)) foreach ($data as $Orden):?>
   <div class="row">
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary"></h6>
+      <h6 class="m-0 font-weight-bold text-primary"></h6>   
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -18,7 +19,6 @@
               <?php echo $Orden['id_orden'];?>
             </h6>
           </div>
-          <button type="submit" class="btn btn-primary">Sincronizar</button>
         </div>
       </div>
     </div>
