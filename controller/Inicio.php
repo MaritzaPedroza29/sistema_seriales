@@ -25,16 +25,38 @@ class Inicio extends App
   public function orden()
   {
     if (isset($_GET['id'])) {
-      $data = $this->Inicio_model->getOrdenID($_GET["id"]);
-      $this->view('head', "Titulo de la vista");
-      $this->view('verOrden', $data);
+      $id=$_GET['id'];
+      $data = $this->Inicio_model->getOrdenID($id);
+      $this->view('head', "Productos");
+      $this->view('verProducto', $data);
       $this->view('foter');
     } else $this->redirectTo('inicio', null, true);
 
   }
+  public function nombre()
+  {
+    if(isset($_GET['nombre'])){
+      $nom=$_GET['nombre'];
+      $data = $this->Inicio_model->getNombre($nom);
+      $this->view('head',"");
+      $this->view('pregunta',$data);
+      $this->view('foter');
+    }else $this->redirectTo('serializar', null, true);
+  }
+  public function cantidad()
+{
+  if(isset($_GET['cantidad'])){
+    $can=$_GET['cantidad'];
+    $nom=$_GET['nombre'];
+    $data=$this->Inicio_model->getCan($nom);
+    $this->view('head',"");
+    $this->view('serializar',$data);
+    $this->view('foter');
+  }else $this->redirectTo('inicio',null,true);
+}
 
   public function createCSV()
-  {
+  { 
     $suma = [];
     $i = 0;
     while ($i < 1000) {
@@ -49,6 +71,7 @@ class Inicio extends App
             $data["deletable"] === TRUE // esta condicion verifica que "deletable" sea verdadero
           ) {
             $this->Inicio_model->setProductos($data["purchases"]["items"]); // este metodo envía los items al modelo /model/Inicio_model.php
+            $this->Inicio_model->getCantidad($data);
           }
         }
       } else

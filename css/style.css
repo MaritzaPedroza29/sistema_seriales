@@ -50,6 +50,10 @@ header h2 {
 header p {letter-spacing: 0.05em;}
 
 
+.contenedor {
+    display: flex;
+    justify-content: center;
+    }
 
 /* //////////////////////////////////////////// */
 /* //////////////////////////////////////////// */
