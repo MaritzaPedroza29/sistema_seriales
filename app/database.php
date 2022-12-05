@@ -119,19 +119,18 @@ class Database
 
     function insert($table, $arrayValues)
     {
-        $arrayKeyValues = array_keys($arrayValues);
-        $keys = $arrayKeyValues[0];
-        $keysValues = ":" . $arrayKeyValues[0];
+        foreach ($arrayValues as $field => $v)
+            $ins[] = ':' . $field;
 
-        for ($i = 1; $i < count($arrayValues); $i++) {
-            $keys .= ", " . $arrayKeyValues[$i];
-            $keysValues .= ", :" . $arrayKeyValues[$i];
-        }
-        $result = $this->connection->prepare("INSERT INTO $table ($keys) VALUES ($keysValues)");
+        $ins = implode(',', $ins);
+        $fields = implode(',', array_keys($arrayValues));
+        $sql = "INSERT INTO $table ($fields) VALUES ($ins)";
 
-        for ($i = 0; $i < count($arrayValues); $i++) {
-            $result->bindparam(':' . $arrayKeyValues[$i], $arrayValues[$arrayKeyValues[$i]]);
+        $result = $this->connection->prepare($sql);
+        foreach ($arrayValues as $f => $v) {
+            $result->bindValue(':' . $f, $v);
         }
+
         $error = $this->connection->errorInfo();
         if ($error[0] === "00000") {
             $result->execute();

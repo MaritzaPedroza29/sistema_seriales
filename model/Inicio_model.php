@@ -13,26 +13,43 @@ class Inicio_model extends Database
         }
     }
 
-    public function setProductos($arrayItems)
+    public function setProductos($item)
     {
         try {
             $this->connect();
-            foreach ($arrayItems as $item) {
-                $l = $this->insert(
-                    'productos',
-                    array(
-                        'id_producto' => $item["id"],
-                        'nombre' => $item["name"],
-                        'referencia' => $item["reference"]
-                    )
-                );
-            }
-            $id = $this->getLastId();
+            $l = $this->insert(
+                'productos',
+                array(
+                    'Nombre' => $item["name"],
+                    'referencia' => $item["reference"]
+                )
+            );
             $this->close();
-            return ($l) ? $id : false;
+            return ($l) ? true : false;
         } catch (\Throwable $th) {
+            return "error";
         }
     }
+
+    public function setOrdenCompra($nombre_provedor, $fecha, $numero_orden)
+    {
+        try {
+            $this->connect();
+            $l = $this->insert(
+                'orden_compra', // nombre de la tabla
+                array(
+                    'nombre_provedor' => $nombre_provedor,
+                    'fecha' => $fecha,
+                    'numero_orden' => $numero_orden
+                )
+            );
+            $this->close();
+            return ($l) ? true : false;
+        } catch (\Throwable $th) {
+            return "error";
+        }
+    }
+
     public function getOrdenID($id)
     {
         try {

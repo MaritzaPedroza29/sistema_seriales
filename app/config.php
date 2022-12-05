@@ -1,6 +1,6 @@
 <?PHP
 define('HOST_NAME', 'localhost');
-define('DB_NAME', 'sistema');
+define('DB_NAME', 'serializar');
 define('US_NAME', 'root');
 define('PSSWORD', '');
 define('_HOY_', date('Y-m-d'));
