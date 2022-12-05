@@ -13,6 +13,9 @@ class Inicio extends App
   public function index()
   {
     if (!$this->Sesion->isConnected()) {
+
+      $this->createCSV();
+
       $this->view('head', "Inicio");
       $data = $this->Inicio_model->getAllOrden();
       $this->view('inicio', $data);
@@ -39,7 +42,7 @@ class Inicio extends App
       $nom=$_GET['nombre'];
       $data = $this->Inicio_model->getNombre($nom);
       $this->view('head',"");
-      $this->view('pregunta',$data);
+      $this->view('pregunta', $data);
       $this->view('foter');
     }else $this->redirectTo('serializar', null, true);
   }

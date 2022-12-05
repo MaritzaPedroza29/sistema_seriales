@@ -1,8 +1,3 @@
-<?php
-include_once "./controller/Inicio.php";
-$Inicio_model;
-$orden_compra=$this->Inicio_model->createOrden();
-?>
 <h3 class="text-center" style="margin-top: 20px; margin-bottom: 20px;">Lista de ordenes</h3>
 <?php if(is_array($data) || is_object($data)) foreach ($data as $Orden):?>
   <div class="row">
