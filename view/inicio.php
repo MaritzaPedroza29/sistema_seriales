@@ -1,5 +1,6 @@
-<h3 style="margin-top: 20px; margin-bottom: 20px; text-align:right;">Lista de ordenes</h3>
-<button type="submit" class="btn btn-primary pull-right">Sincronizar</button>
+
+<h3 style="margin-top: 20px; margin-bottom: 20px; text-align:center;">Lista de ordenes de compra</h3>
+<body style="margin-bottom: 20px;">
 <?php if(is_array($data) || is_object($data)) foreach ($data as $Orden):?>
   <div class="row">
     <div class="card-header py-3">
@@ -23,5 +24,52 @@
       </div>
     </div>
   </div>
-
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+  <div class="col">
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body" style="border: 1px;">
+        <h5 class="card-title">Nombre:</h5>
+        <p class="card-text"><?php echo $Orden['nombre_provedor'];?></p>
+        <h5>Fecha:</h5>
+        <p class="card-text"><?php echo $Orden['fecha'];?></p>
+        <h5>Número de orden:</h5>
+        <p class="card-text"><?php echo $Orden['id_orden'];?></p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+      <h5 class="card-title">Nombre:</h5>
+        <p class="card-text"><?php echo $Orden['nombre_provedor'];?></p>
+        <h5>Fecha:</h5>
+        <p class="card-text"><?php echo $Orden['fecha'];?></p>
+        <h5>Número de orden:</h5>
+        <p class="card-text"><?php echo $Orden['id_orden'];?></p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+    </div>
+  </div>
+</div>
 <?php endforeach; ?>
+
+<a href="<?php echo BASE_URL?>inicio/actualizar" class="btn btn-primary" style="margin: 1em 2em 3em 4em;">Sincronizar</a>

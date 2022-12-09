@@ -14,12 +14,11 @@ class Inicio extends App
   {
     if (!$this->Sesion->isConnected()) {
 
-      $this->createCSV();
-
-      $this->view('head', "Inicio");
       $data = $this->Inicio_model->getAllOrden();
+      $this->view('head', "Inicio");
       $this->view('inicio', $data);
       $this->view('foter');
+      //$this->insertar();
     } else
       $this->redirectTo('user');
   }
@@ -37,40 +36,46 @@ class Inicio extends App
       $this->redirectTo('inicio', null, true);
 
   }
-  public function nombre()
+  public function id()
   {
-    if (isset($_GET['nombre'])) {
-      $nom = $_GET['nombre'];
-      $data = $this->Inicio_model->getNombre($nom);
-      $this->view('head', "");
-      $this->view('pregunta', $data);
+    if (isset($_GET['idpoc'])) {
+      $idpoc = $_GET['idpoc'];
+      $data = $this->Inicio_model->getNombre($idpoc);
+      $this->view('head','pregunta');
+      $this->view('cantidadSeriales',$data);
       $this->view('foter');
     } else
-      $this->redirectTo('inicio', null, true);
+      $this->redirectTo('serializar', null, true);
   }
-  public function cantidad()
+  public function idpoc()
   {
-    if (isset($_GET['cantidad'])) {
-      $can = $_GET['cantidad'];
-      $nom = $_GET['nombre'];
-      $data = $this->Inicio_model->getCan($nom);
-
-      $this->view('head');
-
-
-      $this->view('serializar', $data);
-
-
+    if(isset($_GET['idpoc'])){
+      $idpoc= $_GET['idpoc'];
+      $data = $this->Inicio_model->getNombre($idpoc);
+      $this->Inicio_model->actualizar($idpoc);
+      $this->view('head','serializar');
+      $this->view('serializar',$data);
       $this->view('foter');
-    } else
-      $this->redirectTo('inicio', null, true);
+    }else
+    $this->redirectTo('inicio',null,true);
   }
+ public function Actualizar()
+ {
+  if (!$this->Sesion->isConnected()) {
 
-  public function createCSV()
+    $this->insertar();
+    $data = $this->Inicio_model->getAllOrden();
+    $this->view('head', "Inicio");
+    $this->view('inicio',$data);
+    $this->view('foter');
+  } else
+    $this->redirectTo('user');
+ }
+
+  public function insertar()
   {
     $suma = [];
     $i = 0;
-    $p = 0;
     while ($i < 1000) {
       $url = "https://api.alegra.com/api/v1/purchase-orders?order_direction=DESC&order_field=id&status=open&fields=deletable&start=" . $i;
       $vector = $this->Alegra->getDataApiAlegra($url);
@@ -83,14 +88,15 @@ class Inicio extends App
             $data["deletable"] === TRUE // esta condicion verifica que "deletable" sea verdadero
 
           ) {
-            //foreach ($data["purchases"]["items"] as $item) {
-              //$this->Inicio_model->setProductos($item); // este metodo envía los items al modelo /model/Inicio_model.php
-            //}
             $this->Inicio_model->setOrdenCompra(
               $data["provider"]["name"],
               $data["date"],
               $data["id"]
-            );
+            );         
+          }
+          foreach ($data["purchases"]["items"] as $item) {
+            $this->Inicio_model->setProductos($item); // este metodo envía los items al modelo /model/Inicio_model.php
+            $this->Inicio_model->setProd_oc($item,$data["id"]);
           }
         }
       } else
