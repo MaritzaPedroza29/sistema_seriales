@@ -1,26 +1,36 @@
 <?php
+require_once ("conexion.php");
+class Datos extends Conexion{
+    private $serial;
+    private $idpoc;
+    public function __CONSTRUCT()
+  {
+    $this->conexion = new Conexion();
+  } 
+  public function insertar (string $serial, int $idpoc)
+  {
+    $this->strSerial = $serial;
+    $this->intIdpoc = $idpoc;
+    $sql = "INSERT INTO `seriales`(`id_prod_oc`, `serial`) VALUES (?,?)";
+    $insert = $this->conexion->prepare($sql);
+    $arrData = array ($this->strSerial, $this->intIdpoc);
+    $restinsert = $insert->execute ($arrData);
+    $idinsert = $this->conexion->lastInsertId();
+  }
+}
+
+
 $serial= $_GET['serial'];
 $idpoc = $_GET['idpoc'];
-$vector = array ();
+$data = json_decode($_GET['serial'], true);
 
-// inserta una nueva fila en la tabla seriales con el serial y el idpoc
-$sqlinsertar="INSERT INTO `seriales` (`id_serial`, `id_prod_oc`, `serial`) VALUES (NULL, '$idpoc', '$serial');";
-$consulta=mysqli_query($sqlinsertar)
 
-if($consulta)
-{
-    // ejecuta una consulta para traerse las cantidades de seriales registrados con el idpoc en la tabla seriales
-    $sqlcontar= "SELECT COUNT(*) as suma FROM `seriales` WHERE `id_prod_oc`=$idpoc;";
+$vector['serial']=$serial;
+$vector['idpoc']=$idpoc;
+//$sql="insert into seriales (id_prod_oc,serial) 
+//values(:idpoc,:serial)";
+//$sql = $conexion->prepare($sql);
 
-    $vector['cantidad']=$lasuma;
-    $vector['estado']=1;
 
-}
-else
- {
-$vector['estado']=0;
-$vector['mensaje']="ERROR ".mysqli_error();
-}
-
-echo json_encode($vector );
+//echo json_encode($vector );
 ?>
